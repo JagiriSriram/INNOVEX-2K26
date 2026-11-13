@@ -1,0 +1,13 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9      # multipart uploads (POST /api/ingest/docx)
+pydantic>=2.6
+pandas>=2.0
+numpy>=1.26
+scikit-learn>=1.4        # TF-IDF fallback embedder
+rank-bm25>=0.2.2         # BM25 keyword search
+faiss-cpu>=1.8           # FAISS vector search
+python-docx>=1.1         # read the given Word (.docx) document
+sentence-transformers>=2.7   # semantic embeddings (downloads ~90MB model once)
+# anthropic>=0.40        # OPTIONAL: only if you set USE_LLM=1
+deep-translator>=1.11   # free any-language <-> English translation (or use OPENAI/ANTHROPIC key)

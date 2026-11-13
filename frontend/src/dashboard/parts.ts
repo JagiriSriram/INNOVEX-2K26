@@ -1,0 +1,26 @@
+// Ordered list of the original dashboard's JS, split verbatim (loaded as classic scripts)
+export const PARTS: string[] = [
+  "part-00-intro.js",
+  "part-01-TONE_ICON.js",
+  "part-02-editRecord.js",
+  "part-03-setPage.js",
+  "part-04-homePage.js",
+  "part-05-painSubpage.js",
+  "part-06-setExerciseDay.js",
+  "part-07-H.js",
+  "part-08-setDoctorTab.js",
+  "part-09-BLINKIT_URL.js",
+  "part-10-setDietTab.js",
+  "part-11-fxIsDark.js",
+  "part-12-MED_PRESETS.js",
+  "part-13-MED_CHIPS.js",
+  "part-14-PCOS_Q.js",
+  "part-15-precCat.js",
+  "part-16-saveHr.js",
+  "part-17-pregCheck.js",
+  "part-97-lang-gate.js",
+  "part-98-voice-chat.js",
+  "part-99-rag-bridge.js",
+  "part-100-chat-history.js",
+  "part-101-voice-assistant.js"
+];

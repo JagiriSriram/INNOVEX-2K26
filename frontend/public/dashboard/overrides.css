@@ -1,0 +1,91 @@
+/* App-level overrides — kept separate so the extracted app.css / intro.css stay verbatim. */
+
+/* Disable vertical overscroll (rubber-band bounce / pull-to-refresh). */
+html,
+body {
+  overscroll-behavior-y: none;
+}
+
+/* ===== Chat: voice + text, language select, floating chat box ===== */
+.lang-select{margin:0;max-width:170px;font-size:13px;}
+.therapy-toggle .lang-select{flex:0 0 auto;}
+.chat-input-row .mic-btn,.cb-input .mic-btn{flex:0 0 44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surfacealt);font-size:18px;cursor:pointer;}
+.mic-btn.on{background:#E0245E;color:#fff;border-color:#E0245E;animation:micPulse 1.1s infinite;}
+@keyframes micPulse{0%{box-shadow:0 0 0 0 rgba(224,36,94,.5)}100%{box-shadow:0 0 0 12px rgba(224,36,94,0)}}
+.mic-status{font-size:12px;font-weight:700;color:#E0245E;min-height:0;}
+.mic-status:empty{display:none;}
+.bubble .spk{display:block;margin-top:6px;background:none;border:none;font-size:14px;cursor:pointer;padding:0;opacity:.75;}
+.bubble .bnote{font-size:11px;opacity:.75;margin-top:6px;font-style:italic;}
+#voiceToast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);max-width:90vw;background:#3A1030;color:#fff;padding:10px 14px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:10002;}
+#voiceToast.show{opacity:1;transform:translate(-50%,0);}
+#chatWidget.on-ai-page{display:none;}
+#chatFab{position:fixed;right:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:54px;height:54px;border-radius:50%;border:none;background:var(--berry-500,#D81B72);color:#fff;font-size:24px;box-shadow:0 6px 18px rgba(216,27,114,.4);cursor:pointer;z-index:900;}
+#chatBox{position:fixed;right:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:min(380px,calc(100vw - 24px));height:min(560px,calc(100vh - 140px));display:flex;flex-direction:column;background:var(--surface,#fff);color:var(--ink,#333);border:1px solid var(--line,#eee);border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,.25);z-index:901;overflow:hidden;}
+#chatBox[hidden]{display:none;}
+.cb-head{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--berry-500,#D81B72);color:#fff;}
+.cb-tools button{background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:8px;width:30px;height:30px;margin-left:6px;cursor:pointer;font-size:14px;}
+.cb-tools button.on{background:#fff;color:#D81B72;}
+.cb-lang{padding:8px 10px 0;}.cb-lang .lang-select{width:100%;max-width:none;}
+.cb-msgs{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px;}
+.cb-empty{font-size:12px;color:var(--inksoft,#777);margin:0;}
+.cb-input{display:flex;gap:6px;padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line,#eee);align-items:center;}
+.cb-input input{flex:1;min-width:0;margin:0;padding:10px;border-radius:10px;border:1px solid var(--line,#ddd);font:inherit;background:var(--bg,#fff);color:inherit;}
+#chatBox .mic-status{padding:0 12px 4px;}
+
+/* ===== Language gate + translator ===== */
+#langFab{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:12px;z-index:899;width:40px;height:40px;border-radius:50%;border:1px solid var(--line,#eee);background:var(--surface,#fff);font-size:20px;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.15);}
+#trBar{position:fixed;left:0;right:0;top:0;height:3px;z-index:10004;display:none;font-size:0;background:linear-gradient(90deg,#E0245E,#C9A0FF,#E0245E);background-size:200% 100%;animation:trBar 1s linear infinite;}
+@keyframes trBar{to{background-position:-200% 0}}
+#langGate{position:fixed;inset:0;z-index:10003;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(160deg,#FFE3EE,#E9D5FF);}
+.lg-card{width:min(560px,100%);max-height:100%;overflow:auto;background:#fff;color:#4A1238;border-radius:22px;padding:22px 18px;text-align:center;box-shadow:0 20px 60px rgba(120,20,80,.3);}
+.lg-ic{font-size:38px}.lg-card h2{font-family:'Fraunces',Georgia,serif;margin:4px 0}.lg-card p{font-size:12px;color:#8A4A70;margin:4px 0 10px}
+#lgFilter{width:100%;box-sizing:border-box;padding:10px 12px;border-radius:12px;border:1px solid #F6C6DC;font:inherit;margin-bottom:10px}
+.lg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.lg-grid button{padding:12px 6px;border-radius:12px;border:1px solid #F6C6DC;background:#FFF5FA;color:#4A1238;font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.lg-grid button:hover,.lg-grid button:focus{background:#FFD3E6;outline:2px solid #D81B72}
+.lg-grid button.sel{background:#D81B72;color:#fff;border-color:#D81B72}
+.lg-note{margin-top:12px!important}
+html[dir=rtl] #langFab{right:auto;left:12px}
+
+/* ---- chat history panel ---- */
+#histModal{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.4);display:flex;align-items:flex-end;justify-content:center}
+#histModal[hidden]{display:none}
+.hist-card{background:#fff;color:#222;width:min(520px,100%);max-height:80vh;border-radius:18px 18px 0 0;display:flex;flex-direction:column;box-shadow:0 -6px 30px rgba(0,0,0,.2)}
+@media(min-width:600px){#histModal{align-items:center}.hist-card{border-radius:18px}}
+.hist-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid #eee}
+.hist-head button{border:0;background:none;font-size:18px;cursor:pointer}
+.hist-list{overflow-y:auto;padding:10px 16px 16px}
+.hist-empty{font-size:13px;color:#777;text-align:center;padding:18px 0}
+.hist-item{border:1px solid #eee;border-radius:12px;padding:10px 12px;margin-bottom:8px;font-size:13px}
+.hist-item.urgent{border-color:#d9534f}
+.hist-item summary{cursor:pointer;display:flex;justify-content:space-between;gap:10px}
+.hist-item .hq{font-weight:700}
+.hist-item .ht{color:#888;font-size:11px;white-space:nowrap}
+.hist-item .ha{margin-top:8px;line-height:1.45}
+.hist-item .hbtns{display:flex;gap:8px;margin-top:8px}
+.hist-item .hbtns button{border:1px solid #ddd;background:#fafafa;border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer}
+.hist-clear,.hist-link{display:block;font-size:12px;margin:8px 0;cursor:pointer}
+#chatBox .cb-tools #wHistBtn{background:none;border:0;cursor:pointer;font-size:15px}
+
+/* ---- standalone voice assistant (outside the chat) ---- */
+#voiceFab{position:fixed;right:80px;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:54px;height:54px;border-radius:50%;border:none;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;box-shadow:0 6px 18px rgba(37,211,102,.45);z-index:9000}
+body.chat-open #voiceFab{display:none!important}
+#voiceFab.on{background:#128C7E;animation:micPulse 1.1s infinite}
+#voiceCard{position:fixed;right:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:min(360px,calc(100vw - 24px));max-height:calc(100vh - 140px);overflow-y:auto;background:var(--surface,#fff);color:var(--ink,#222);border:1px solid var(--line,#eee);border-radius:18px;box-shadow:0 10px 34px rgba(0,0,0,.28);padding:12px 14px 14px;z-index:9001}
+#voiceCard[hidden]{display:none}
+.vc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.vc-head button{border:0;background:none;font-size:18px;cursor:pointer}
+.vc-lang .lang-select{width:100%;margin-bottom:8px}
+.vc-status{font-size:13px;font-weight:700;color:var(--inksoft,#666);margin:4px 0 8px}
+.vc-status.live{color:#E0245E}
+.vc-you{background:var(--surfacealt,#f6f6f6);border-radius:12px;padding:8px 10px;font-size:14px;margin-bottom:8px}
+.vc-you small{display:block;font-size:11px;color:var(--inksoft,#777);margin-bottom:2px}
+.vc-ans{border:1px solid var(--line,#eee);border-radius:12px;padding:10px 12px;font-size:13.5px;line-height:1.45;margin-bottom:8px}
+.vc-ans.urgent{border-color:#d9534f;background:#fff4f3}
+.vc-btns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.vc-btns button{border:1px solid var(--line,#ddd);background:var(--surfacealt,#fafafa);border-radius:10px;padding:7px 11px;font-size:12.5px;cursor:pointer}
+.vc-btns .danger{background:#d9534f;color:#fff;border-color:#d9534f}
+.vc-mic{width:100%;border:none;border-radius:14px;padding:14px;font-size:16px;font-weight:800;background:#25D366;color:#fff;cursor:pointer}
+.vc-mic{display:flex;align-items:center;justify-content:center;gap:8px}
+.vc-mic svg{width:22px;height:22px}
+.vc-mic.on{background:#128C7E;animation:micPulse 1.1s infinite}
